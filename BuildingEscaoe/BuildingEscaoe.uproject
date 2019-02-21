@@ -8,7 +8,10 @@
 		{
 			"Name": "BuildingEscaoe",
 			"Type": "Runtime",
-			"LoadingPhase": "Default"
+			"LoadingPhase": "Default",
+			"AdditionalDependencies": [
+				"Engine"
+			]
 		}
 	]
 }
