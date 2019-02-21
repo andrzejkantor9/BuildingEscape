@@ -13,3 +13,7 @@ BuildingEscaoe/Content/StarterContent/
 ##########################
 *.VC.opendb
 *.VC.db
+*.db-shm
+*.db-wal
+*.suo
+*.ipch
