@@ -20,7 +20,7 @@ void UOpenDoor::BeginPlay()
 	Super::BeginPlay();
 
 	FRotator DoorRotation = GetOwner()->GetActorRotation();
-	DoorRotation.Yaw = 90;
+	DoorRotation.Yaw = OpenAngle;
 	GetOwner()->SetActorRotation(DoorRotation);	
 }
 
