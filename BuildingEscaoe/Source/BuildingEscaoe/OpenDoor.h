@@ -36,4 +36,6 @@ private:
 
 	UPROPERTY(VisibleAnywhere)
 		AActor *ActorThatOpens;	//remember - pawwn inherits from aactor
+
+	float GroundLocation = 0.f;
 };

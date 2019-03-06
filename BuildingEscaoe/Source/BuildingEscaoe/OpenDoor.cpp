@@ -20,7 +20,8 @@ void UOpenDoor::BeginPlay()
 {
 	Super::BeginPlay();
 
-	ActorThatOpens = GetWorld()->GetFirstPlayerController()->GetPawn(); 
+	ActorThatOpens = GetWorld()->GetFirstPlayerController()->GetPawn();
+	GroundLocation = ActorThatOpens->GetActorLocation().Z;
 }
 
 void UOpenDoor::OpenDoor()
@@ -35,6 +36,11 @@ void UOpenDoor::OpenDoor()
 void UOpenDoor::TickComponent(float DeltaTime, ELevelTick TickType, FActorComponentTickFunction* ThisTickFunction)
 {
 	Super::TickComponent(DeltaTime, TickType, ThisTickFunction);
+
+	//hold the player on the ground
+	FVector ActorLocation = ActorThatOpens->GetActorLocation();
+	ActorLocation.Z = GroundLocation;
+	ActorThatOpens->SetActorLocation(ActorLocation);
 
 	// poll trigger volume every frame 
 	//if the actor that opens is on the volume then we open the door
