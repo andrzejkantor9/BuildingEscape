@@ -22,6 +22,7 @@ protected:
 	virtual void BeginPlay() override;
 
 	void OpenDoor();
+	void CloseDoor();
 
 public:	
 	// Called every frame
@@ -34,8 +35,13 @@ private:
 	UPROPERTY(EditAnywhere)
 		ATriggerVolume *PressurePlate;
 
-	UPROPERTY(VisibleAnywhere)
-		AActor *ActorThatOpens;	//remember - pawwn inherits from aactor
+	AActor *DoorOwner;
+	AActor *ActorThatOpens;	//remember - pawwn inherits from aactor
 
+	UPROPERTY(EditAnywhere)
+		float DoorCloseDelay = 1.f;
+
+	float LastDoorOpenTime = 0.f;
 	float GroundLocation = 0.f;
+	bool DoorClosed = true;
 };
