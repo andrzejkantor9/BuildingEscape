@@ -23,8 +23,30 @@ void UGrabber::BeginPlay()
 {
 	Super::BeginPlay();
 
-	// ...
-	
+	///look for attached physics handle
+	PhysicsHandle = GetOwner()->FindComponentByClass<UPhysicsHandleComponent>();
+	if (PhysicsHandle)
+	{
+
+	}
+	else
+	{
+		UE_LOG(LogTemp, Error, TEXT("Object: %s is missing the Physics Handle Component."), *GetOwner()->GetName())
+	}
+
+	///look for attached input component (only appears during runtime)
+	InputComponent = GetOwner()->FindComponentByClass<UInputComponent>();
+	if (InputComponent)
+	{
+		UE_LOG(LogTemp, Warning, TEXT("%s reporting for duty!"), *InputComponent->GetName());
+		
+		///bing the input action
+		InputComponent->BindAction("Grab", IE_Pressed, this, &UGrabber::Grab);
+	}
+	else
+	{
+		UE_LOG(LogTemp, Error, TEXT("Object: %s is missing the Input Component."), *GetOwner()->GetName())
+	}
 }
 
 
@@ -39,10 +61,6 @@ void UGrabber::TickComponent(float DeltaTime, ELevelTick TickType, FActorCompone
 	FRotator PlayerViewPointRotation;
 	GetWorld()->GetFirstPlayerController()->GetPlayerViewPoint(
 		OUT PlayerViewPointLocation, OUT PlayerViewPointRotation);
-
-	//log out to test
-	//UE_LOG(LogTemp, Warning, TEXT("Camera Location: %s Camera Rotation: %s"), 
-	//	*PlayerViewPointLocation.ToString() , *PlayerViewPointRotation.ToString());
 
 	///draw a red trace to visualise
 	FVector LineTraceEnd = PlayerViewPointLocation + PlayerViewPointRotation.Vector() * DebugLineReach; 
@@ -69,5 +87,10 @@ void UGrabber::TickComponent(float DeltaTime, ELevelTick TickType, FActorCompone
 
 		UE_LOG(LogTemp, Warning, TEXT("Hit actor is: %s!"), *HitActorName);
 	}
+}
+
+void UGrabber::Grab()
+{
+	UE_LOG(LogTemp, Warning, TEXT("Grab pressed!"));
 }
 
