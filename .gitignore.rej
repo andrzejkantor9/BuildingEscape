@@ -1,0 +1,11 @@
+diff a/.gitignore b/.gitignore	(rejected hunks)
+@@ -6,7 +6,8 @@
+ */DerivedDataCache/
+ */Binaries/
+ */Intermediate/
+-BuildingEscaoe/Content/StarterContent/
++BuildingEscaoe/Content/StarterContent/Textures
++BuildingEscaoe/Content/StarterContent/HDRI
+ 
+ ##########################
+ # VS Generated Files #
