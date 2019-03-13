@@ -37,11 +37,10 @@ void UGrabber::BeginPlay()
 	///look for attached input component (only appears during runtime)
 	InputComponent = GetOwner()->FindComponentByClass<UInputComponent>();
 	if (InputComponent)
-	{
-		UE_LOG(LogTemp, Warning, TEXT("%s reporting for duty!"), *InputComponent->GetName());
-		
-		///bing the input action
+	{		
+		///bind the input action
 		InputComponent->BindAction("Grab", IE_Pressed, this, &UGrabber::Grab);
+		InputComponent->BindAction("Grab", IE_Released, this, &UGrabber::Release);
 	}
 	else
 	{
@@ -92,5 +91,10 @@ void UGrabber::TickComponent(float DeltaTime, ELevelTick TickType, FActorCompone
 void UGrabber::Grab()
 {
 	UE_LOG(LogTemp, Warning, TEXT("Grab pressed!"));
+}
+
+void UGrabber::Release()
+{
+	UE_LOG(LogTemp, Warning, TEXT("Button released!"));
 }
 
