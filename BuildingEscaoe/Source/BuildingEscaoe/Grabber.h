@@ -28,6 +28,8 @@ public:
 
 private:
 	const float DebugLineReach = 100.f;
+	FVector PlayerViewPointLocation;
+	FRotator PlayerViewPointRotation;
 
 	UPhysicsHandleComponent *PhysicsHandle = nullptr;
 	UInputComponent *InputComponent = nullptr;
@@ -42,4 +44,7 @@ private:
 	void SetupInputComponent();
 	//return hit for first physics body reached
 	FHitResult GetFirstPhysicsBodyInReach();
+	//moves grabbed object if physics body is in range
+	void MoveHoldObject();
+	FVector GetLineTraceEnd();
 };
