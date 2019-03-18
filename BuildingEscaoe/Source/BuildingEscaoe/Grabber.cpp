@@ -59,9 +59,19 @@ void UGrabber::TickComponent(float DeltaTime, ELevelTick TickType, FActorCompone
 {
 	Super::TickComponent(DeltaTime, TickType, ThisTickFunction);
 
-	GetFirstPhysicsBodyInReach();
+	FVector PlayerViewPointLocation;
+	FRotator PlayerViewPointRotation;
+	GetWorld()->GetFirstPlayerController()->GetPlayerViewPoint(
+		OUT PlayerViewPointLocation, OUT PlayerViewPointRotation);
+
+	///draw a red trace to visualise
+	FVector LineTraceEnd = PlayerViewPointLocation + PlayerViewPointRotation.Vector() * DebugLineReach;
+
 	//if the physics handle is attached
+	if (PhysicsHandle->GrabbedComponent) {
 		//move the object that we are holding
+		PhysicsHandle->SetTargetLocation(LineTraceEnd);
+	}
 }
 
 void UGrabber::Grab()
@@ -69,15 +79,26 @@ void UGrabber::Grab()
 	UE_LOG(LogTemp, Warning, TEXT("Grab pressed!"));
 
 	//try and reach any actor with physics collision channel set
-
+	auto HitResult = GetFirstPhysicsBodyInReach();
+	auto ComponentToGrab = HitResult.GetComponent();
+	auto ActorHit = HitResult.GetActor();
+	
 	//if we hit something then attach physics
-	///TODO attach physics handle
+	if (ActorHit) {
+	///attach physics handle 
+		PhysicsHandle->GrabComponent(
+			ComponentToGrab,
+			NAME_None,
+			ComponentToGrab->GetOwner()->GetActorLocation(),
+			true //allow rotation
+		);
+	}
 }
 
 void UGrabber::Release()
 {
 	UE_LOG(LogTemp, Warning, TEXT("Button released!"));
-
+	PhysicsHandle->ReleaseComponent();
 	///TODO release physics handle
 }
 
@@ -92,7 +113,7 @@ FHitResult UGrabber::GetFirstPhysicsBodyInReach()
 
 	///draw a red trace to visualise
 	FVector LineTraceEnd = PlayerViewPointLocation + PlayerViewPointRotation.Vector() * DebugLineReach;
-	DrawDebugLine(GetWorld(), PlayerViewPointLocation, LineTraceEnd, FColor(255, 0, 0), false, 0.f, 0.f, 10.f);
+	//DrawDebugLine(GetWorld(), PlayerViewPointLocation, LineTraceEnd, FColor(255, 0, 0), false, 0.f, 0.f, 10.f);
 
 	///Setup query parameters
 	FCollisionQueryParams TraceParameters(FName(TEXT("")), false, GetOwner());
@@ -116,5 +137,5 @@ FHitResult UGrabber::GetFirstPhysicsBodyInReach()
 		UE_LOG(LogTemp, Warning, TEXT("Hit actor is: %s!"), *HitActorName);
 	}
 
-	return FHitResult();
+	return Hit;
 }
