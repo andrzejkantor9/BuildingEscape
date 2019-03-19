@@ -53,6 +53,7 @@ void UGrabber::SetupInputComponent()
 void UGrabber::MoveHoldObject()
 {
 	//if the physics handle is attached
+	if (!PhysicsHandle) { return; }
 	if (PhysicsHandle->GrabbedComponent) {
 		//move the object that we are holding
 		PhysicsHandle->SetTargetLocation(GetLineTraceEnd());
@@ -78,6 +79,7 @@ void UGrabber::Grab()
 	//if we hit something then attach physics
 	if (ActorHit) {
 	///attach physics handle 
+		if (!PhysicsHandle) { return; }
 		PhysicsHandle->GrabComponent(
 			ComponentToGrab,
 			NAME_None, //no bones needed
@@ -89,6 +91,7 @@ void UGrabber::Grab()
 
 void UGrabber::Release()
 {
+	if (!PhysicsHandle) { return; }
 	PhysicsHandle->ReleaseComponent();
 }
 
