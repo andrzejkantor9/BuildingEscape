@@ -36,7 +36,6 @@ private:
 		ATriggerVolume *PressurePlate;
 
 	AActor *DoorOwner;
-	AActor *ActorThatOpens;	//remember - pawwn inherits from aactor
 
 	UPROPERTY(EditAnywhere)
 		float DoorCloseDelay = 1.f;
@@ -44,4 +43,7 @@ private:
 	float LastDoorOpenTime = 0.f;
 	float GroundLocation = 0.f;
 	bool DoorClosed = true;
+
+	//returns total mass on plate in kg
+	float GetTotalMassOnPlate();
 };
