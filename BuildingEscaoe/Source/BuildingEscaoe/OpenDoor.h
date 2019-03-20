@@ -42,6 +42,9 @@ private:
 	UPROPERTY(EditAnywhere)
 		float DoorCloseDelay = 1.f;
 
+	UPROPERTY(EditAnywhere)
+		float OpeningMass = 50.f;
+
 	float LastDoorOpenTime = 0.f;
 	float GroundLocation = 0.f;
 	bool DoorClosed = true;

@@ -59,7 +59,7 @@ void UOpenDoor::TickComponent(float DeltaTime, ELevelTick TickType, FActorCompon
 
 	// poll trigger volume every frame 
 	//if the actor that opens is on the volume then we open the door
-	if (GetTotalMassOnPlate() > 50.f) //TODO change to constexpr variable
+	if (GetTotalMassOnPlate() > OpeningMass) 
 	{
 		OpenDoor();
 		LastDoorOpenTime = GetWorld()->GetTimeSeconds();
