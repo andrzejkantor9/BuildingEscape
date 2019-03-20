@@ -29,9 +29,12 @@ void UOpenDoor::BeginPlay()
 
 void UOpenDoor::OpenDoor()
 {
+	/*
 	FRotator DoorRotation = GetOwner()->GetActorRotation();
 	DoorRotation.Yaw = OpenAngle;
 	GetOwner()->SetActorRotation(DoorRotation);
+	*/
+	OnOpenRequest.Broadcast();
 	DoorClosed = false;
 }
 
