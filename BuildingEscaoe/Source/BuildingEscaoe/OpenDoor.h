@@ -32,14 +32,12 @@ protected:
 private:
 
 	UPROPERTY(EditAnywhere)
-		ATriggerVolume *PressurePlate = nullptr;
+		ATriggerVolume *PressurePlate1 = nullptr;
 
 	AActor *DoorOwner = nullptr;
 
 	UPROPERTY(EditAnywhere)
 		float OpeningMass = 50.f;
-
-	bool DoorClosed = true;
 
 	//returns total mass on plate in kg
 	float GetTotalMassOnPlate();
