@@ -23,9 +23,9 @@ void UOpenDoorLast::BeginPlay()
 
 }
 
-void UOpenDoorLast::Open() 
+void UOpenDoorLast::Open() const
 {
-	if(AreAllDoorOpen())
+	if(AreAllDoorOpen)
 	{
 		OnOpen.Broadcast();
 	}

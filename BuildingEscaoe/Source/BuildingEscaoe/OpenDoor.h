@@ -28,17 +28,16 @@ public:
 protected:
 	// Called when the game starts
 	virtual void BeginPlay() override;
+	//returns total mass on plate in kg
+	float GetTotalMassOnPlate(ATriggerVolume*);
 
-private:
+	virtual void Open() ;
 
 	UPROPERTY(EditAnywhere)
 		ATriggerVolume *PressurePlate1 = nullptr;
-
-	AActor *DoorOwner = nullptr;
-
+private:
 	UPROPERTY(EditAnywhere)
 		float OpeningMass = 50.f;
 
-	//returns total mass on plate in kg
-	float GetTotalMassOnPlate();
+	AActor *DoorOwner = nullptr;	   
 };

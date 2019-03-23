@@ -22,7 +22,7 @@ void UOpenDoor::BeginPlay()
 {
 	Super::BeginPlay();
 
-	if (!PressurePlate) {
+	if (!PressurePlate1) {
 		UE_LOG(LogTemp, Error, TEXT("%s is missing Pressure plate."), *GetOwner()->GetName());
 	}
 }
@@ -40,9 +40,9 @@ void UOpenDoor::TickComponent(float DeltaTime, ELevelTick TickType, FActorCompon
 
 	// poll trigger volume every frame 
 	//if the actor that opens is on the volume then we open the door
-	if (GetTotalMassOnPlate() > OpeningMass) 
+	if (GetTotalMassOnPlate(PressurePlate1) > OpeningMass) 
 	{
-		OnOpen.Broadcast();
+		Open();
 	}
 	else
 	{
@@ -50,7 +50,9 @@ void UOpenDoor::TickComponent(float DeltaTime, ELevelTick TickType, FActorCompon
 	}
 }
 
-float UOpenDoor::GetTotalMassOnPlate()
+
+
+float UOpenDoor::GetTotalMassOnPlate(ATriggerVolume *PressurePlate)
 {
 	float TotalMass = 0.f;
 	TArray<AActor*> PressurePlateOverlappingActors;
@@ -67,4 +69,9 @@ float UOpenDoor::GetTotalMassOnPlate()
 	}
 
 	return TotalMass;
+}
+
+void UOpenDoor::Open() 
+{
+	OnOpen.Broadcast();
 }

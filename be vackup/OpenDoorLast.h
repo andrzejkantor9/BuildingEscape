@@ -22,7 +22,7 @@ public:
 protected:
 	// Called when the game starts
 	virtual void BeginPlay() override;
-	virtual void Open() ;
+	virtual void Open() const;
 
 public:
 	// Called every frame
