@@ -19,15 +19,17 @@ void UOpenDoorLast::BeginPlay()
 {
 	Super::BeginPlay();
 
-	UE_LOG(LogTemp, Warning, TEXT("UOPENDOORLASTHASLOADED!"));
-
 }
 
 void UOpenDoorLast::Open() 
 {
-	if(AreAllDoorOpen())
+	if(LetMainDoorOpen())
 	{
 		OnOpen.Broadcast();
+	}
+	else
+	{
+		OnClose.Broadcast();
 	}
 }
 
@@ -40,19 +42,20 @@ void UOpenDoorLast::TickComponent(float DeltaTime, ELevelTick TickType, FActorCo
 	// ...
 }
 
-bool UOpenDoorLast::AreAllDoorOpen()
+bool UOpenDoorLast::LetMainDoorOpen()
 {
 	if (!PressurePlate2 || !PressurePlate3 || !PressurePlate4) { return false; }
+	UE_LOG(LogTemp, Warning, TEXT("Code entered LetMainDoorOpen()"));
+
 	int NumberOfTriggerPressurePlates = 0;
 
-	if (GetTotalMassOnPlate(PressurePlate1) > OpeningMass1) { ++NumberOfTriggerPressurePlates; }
+	if (GetTotalMassOnPlate(PressurePlate1) > OpeningMass1) { ++NumberOfTriggerPressurePlates; 	}
 	if (GetTotalMassOnPlate(PressurePlate2) > OpeningMass1) { ++NumberOfTriggerPressurePlates; }
 	if (GetTotalMassOnPlate(PressurePlate3) > OpeningMass1) { ++NumberOfTriggerPressurePlates; }
 	if (GetTotalMassOnPlate(PressurePlate4) > OpeningMass1) { ++NumberOfTriggerPressurePlates; }
 	//if all 4 triggers are pushed then true - open the main door
 		//iterate through all 4 triggers
 	//else - false, do not open the main door
-
 	if (NumberOfTriggerPressurePlates == 4) { return true; }
 	
 	return false;

@@ -27,7 +27,7 @@ protected:
 public:
 	// Called every frame
 	virtual void TickComponent(float DeltaTime, ELevelTick TickType, FActorComponentTickFunction* ThisTickFunction) override;
-	bool AreAllDoorOpen();
+	bool LetMainDoorOpen();
 private:
 	UPROPERTY(EditAnywhere)
 		ATriggerVolume *PressurePlate2 = nullptr;
