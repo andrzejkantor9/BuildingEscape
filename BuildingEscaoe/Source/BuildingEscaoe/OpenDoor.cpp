@@ -65,7 +65,7 @@ float UOpenDoor::GetTotalMassOnPlate(ATriggerVolume *PressurePlate)
 	for (const auto* ActorsOnPlate : PressurePlateOverlappingActors)
 	{
 		TotalMass += ActorsOnPlate->FindComponentByClass<UPrimitiveComponent>()->GetMass();
-		UE_LOG(LogTemp, Warning, TEXT("Mass on plate equals: %f"), TotalMass);
+		//UE_LOG(LogTemp, Warning, TEXT("Mass on plate equals: %f"), TotalMass);
 	}
 
 	return TotalMass;

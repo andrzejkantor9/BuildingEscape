@@ -44,8 +44,8 @@ void UOpenDoorLast::TickComponent(float DeltaTime, ELevelTick TickType, FActorCo
 
 bool UOpenDoorLast::LetMainDoorOpen()
 {
-	if (!PressurePlate2 || !PressurePlate3 || !PressurePlate4) { return false; }
-	UE_LOG(LogTemp, Warning, TEXT("Code entered LetMainDoorOpen()"));
+	if (!PressurePlate2 || !PressurePlate3 || !PressurePlate4) {return false; }
+	
 
 	int NumberOfTriggerPressurePlates = 0;
 
