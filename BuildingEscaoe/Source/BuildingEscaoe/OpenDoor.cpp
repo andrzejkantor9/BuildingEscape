@@ -33,12 +33,6 @@ void UOpenDoor::TickComponent(float DeltaTime, ELevelTick TickType, FActorCompon
 {
 	Super::TickComponent(DeltaTime, TickType, ThisTickFunction);
 
-	//hold the player on the ground
-	//FVector ActorLocation = ActorThatOpens->GetActorLocation();
-	//ActorLocation.Z = GroundLocation;
-	//ActorThatOpens->SetActorLocation(ActorLocation);
-
-	// poll trigger volume every frame 
 	//if the actor that opens is on the volume then we open the door
 	if (GetTotalMassOnPlate(PressurePlate1) > OpeningMass) 
 	{
@@ -50,22 +44,19 @@ void UOpenDoor::TickComponent(float DeltaTime, ELevelTick TickType, FActorCompon
 	}
 }
 
-
-
 float UOpenDoor::GetTotalMassOnPlate(ATriggerVolume *PressurePlate)
 {
 	float TotalMass = 0.f;
 	TArray<AActor*> PressurePlateOverlappingActors;
 
 	//find all overlapping actors
-	if (!PressurePlate) {return 1.f; 	}
+	if (!PressurePlate) {return 1.f; }
 	PressurePlate->GetOverlappingActors(OUT PressurePlateOverlappingActors);
 
 	//iterate through them adding their masses
 	for (const auto* ActorsOnPlate : PressurePlateOverlappingActors)
 	{
 		TotalMass += ActorsOnPlate->FindComponentByClass<UPrimitiveComponent>()->GetMass();
-		//UE_LOG(LogTemp, Warning, TEXT("Mass on plate equals: %f"), TotalMass);
 	}
 
 	return TotalMass;

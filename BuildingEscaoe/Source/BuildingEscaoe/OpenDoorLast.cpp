@@ -45,18 +45,17 @@ void UOpenDoorLast::TickComponent(float DeltaTime, ELevelTick TickType, FActorCo
 bool UOpenDoorLast::LetMainDoorOpen()
 {
 	if (!PressurePlate2 || !PressurePlate3 || !PressurePlate4) {return false; }
-	
 
 	int NumberOfTriggerPressurePlates = 0;
+	constexpr int NEEDEDPRESSUREPLATES = 3;
 
-	if (GetTotalMassOnPlate(PressurePlate1) > OpeningMass1) { ++NumberOfTriggerPressurePlates; 	}
+	//if all 4 triggers are pushed then true - open the main door
 	if (GetTotalMassOnPlate(PressurePlate2) > OpeningMass1) { ++NumberOfTriggerPressurePlates; }
 	if (GetTotalMassOnPlate(PressurePlate3) > OpeningMass1) { ++NumberOfTriggerPressurePlates; }
 	if (GetTotalMassOnPlate(PressurePlate4) > OpeningMass1) { ++NumberOfTriggerPressurePlates; }
-	//if all 4 triggers are pushed then true - open the main door
-		//iterate through all 4 triggers
+
 	//else - false, do not open the main door
-	if (NumberOfTriggerPressurePlates == 4) { return true; }
+	if (NumberOfTriggerPressurePlates == NEEDEDPRESSUREPLATES) { return true; }
 	
 	return false;
 }

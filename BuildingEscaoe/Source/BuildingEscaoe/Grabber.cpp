@@ -98,7 +98,6 @@ void UGrabber::Release()
 FHitResult UGrabber::GetFirstPhysicsBodyInReach()
 {
 	FVector LineTraceEnd = GetLineTraceEnd();
-	//DrawDebugLine(GetWorld(), PlayerViewPointLocation, LineTraceEnd, FColor(255, 0, 0), false, 0.f, 0.f, 10.f);
 
 	///ray-cast out to reacch distancez
 	FHitResult HitResult;
@@ -115,7 +114,6 @@ FHitResult UGrabber::GetFirstPhysicsBodyInReach()
 
 FVector UGrabber::GetLineTraceEnd()
 {
-	//tripple slashes make comments unrelated to line below
 	/// Get the player veiwport this tick
 	GetWorld()->GetFirstPlayerController()->GetPlayerViewPoint(
 		OUT PlayerViewPointLocation, OUT PlayerViewPointRotation);
