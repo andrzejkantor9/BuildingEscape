@@ -13,7 +13,6 @@ BuildingEscaoe/Content/StarterContent/HDRI
 # VS Generated Files #
 ##########################
 *.VC.opendb
-*.VC.db
 *.db-shm
 *.db-wal
 *.suo
