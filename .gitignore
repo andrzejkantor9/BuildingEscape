@@ -16,5 +16,4 @@ BuildingEscaoe/Content/StarterContent/HDRI
 *.db-shm
 *.db-wal
 *.suo
-*.VC.db
 *.ipch
